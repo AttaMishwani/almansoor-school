@@ -9,6 +9,7 @@ export default {
       colors: {
         brandWhite: "#FFFFFF",
         brandBlue: "#1E3A8A",
+
       },
     },
   },

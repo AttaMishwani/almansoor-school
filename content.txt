@@ -1,0 +1,12 @@
+   <section className="py-16 px-6 max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-brandBlue mb-6">About Us</h2>
+          <p className="max-w-3xl mx-auto text-lg text-gray-600">
+            At{" "}
+            <span className="font-semibold text-brandBlue">
+              Al Mansoor School
+            </span>
+            , we are dedicated to nurturing young minds, fostering creativity,
+            and encouraging leadership. Our mission is to provide quality
+            education with values, preparing students to succeed in life.
+          </p>
+        </section>
