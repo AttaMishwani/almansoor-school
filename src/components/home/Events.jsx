@@ -32,35 +32,37 @@ const Events = () => {
   ];
 
   return (
-    <section className="py-16 px-6 bg-gray-50">
-      <h2 className="text-[5rem] font-bold text-black/70 mb-12 text-center poppins">
+    <section className="py-16 px-4 sm:px-6 bg-gray-50">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold text-black/70 mb-12 text-center poppins">
         Events
       </h2>
 
-      <div className="max-w-6xl mx-auto space-y-12">
+      <div className="max-w-6xl mx-auto space-y-16">
         {events.map((event, index) => (
           <div
             key={event.id}
-            className={`flex flex-col md:flex-row items-center gap-8 ${
+            className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 ${
               index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
             }`}
           >
             {/* Image */}
-            <div className="flex-shrink-0 w-full md:w-1/2">
+            <div className="w-full md:w-1/2">
               <img
                 src={event.image}
                 alt={event.title}
-                className="rounded-xl shadow-lg w-full h-64 object-cover"
+                className="rounded-xl shadow-lg w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
               />
             </div>
 
             {/* Text */}
-            <div className="w-full md:w-1/2 md:mt-8">
-              <h3 className="text-2xl font-semibold text-blue-600 mb-2">
+            <div className="w-full md:w-1/2 text-center md:text-left">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-blue-600 mb-2">
                 {event.title}
               </h3>
-              <p className="text-sm text-gray-500 mb-4">{event.date}</p>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-500 mb-4">
+                {event.date}
+              </p>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                 {event.description}
               </p>
             </div>

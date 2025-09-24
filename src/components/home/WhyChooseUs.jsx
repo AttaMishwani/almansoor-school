@@ -32,31 +32,32 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-16  max-w-6xl mx-auto">
-      <h2 className="text-[5rem] font-bold text-black/70 mb-10 text-center poppins">
+    <section className="py-16 max-w-6xl mx-auto px-4">
+      {/* Heading */}
+      <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black/70 mb-10 text-center poppins">
         Why Choose Us?
       </h2>
 
-      <div className="grid md:grid-cols-3 gap-5">
+      {/* Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {cards.map((card) => (
           <div
             key={card.id}
-            className={`${card.bg} rounded-xl p-6 py-16 
-            shadow-lg shadow-blue-400/40 
-            hover:shadow-2xl hover:shadow-blue-400/70 
-            hover:scale-105 transform transition duration-300 ease-in-out cursor-pointer`}
+            className={`${card.bg} rounded-xl p-6 py-12 shadow-lg shadow-blue-400/40 
+              hover:shadow-2xl hover:shadow-blue-400/70 
+              hover:scale-105 transform transition duration-300 ease-in-out cursor-pointer`}
           >
             <img
               src={card.img}
-              className="w-16 h-16 mb-6 transition-transform duration-300 group-hover:rotate-6"
+              className="w-14 h-14 md:w-16 md:h-16 mb-6 transition-transform duration-300 group-hover:rotate-6"
               alt={card.title}
             />
             <h3
-              className={`text-3xl font-semibold mb-4 ${card.textColor} transition-colors duration-300 `}
+              className={`text-2xl md:text-3xl font-semibold mb-4 ${card.textColor}`}
             >
               {card.title}
             </h3>
-            <p className="text-white text-lg">{card.desc}</p>
+            <p className="text-white text-base md:text-lg">{card.desc}</p>
           </div>
         ))}
       </div>

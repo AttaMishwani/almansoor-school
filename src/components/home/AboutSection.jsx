@@ -1,13 +1,10 @@
 import React from "react";
-import aboutBg from "../../assets/images/home/homeAboutSec2.jpg";
 import aboutimg from "../../assets/images/home/homeAboutSec.jpg";
-
-// import aboutBg from "../assets/images/home/homeAboutSec2.jpg";
-// import aboutimg from "../assets/images/home/homeAboutSec.jpg";
 
 const AboutSection = () => {
   return (
-    <section className="w-[100%] relative h-[100vh] bg-blue-500    flex justify-center items-center">
+    <section className="w-full relative min-h-screen bg-blue-500 flex justify-center items-center px-4 py-12">
+      {/* Background formulas */}
       <div className="absolute inset-0 pointer-events-none select-none">
         <p className="absolute top-10 left-8 text-4xl font-bold text-white/10 rotate-3 ibm-plex-serif-semibold italic">
           E = mc²
@@ -41,35 +38,41 @@ const AboutSection = () => {
         </p>
       </div>
 
-      <div className="container w-full z-10 max-w-[1100px] mx-auto ">
-        <section className="mx-auto text-center  w-[100%]">
-          <div className="flex justify-between items-center  w-[100%] ">
-            <div className="w-[50%]">
-              <img src={aboutimg} className="w-[100%] rounded-xl" alt="" />
-            </div>
-            <div className="min-h-full  w-[45%] text-left ">
-              <h2 className="text-[5rem] font-bold  mb-3 text-white/90 poppins">
-                ABOUT US
-              </h2>
-              <p className="text-lg text-white leading-relaxed">
-                At <span className="bold">Al Mansoor School</span>, we are
-                dedicated to nurturing young minds, fostering creativity, and
-                encouraging leadership. Our mission is to provide quality
-                education with values, preparing students to succeed in life. We
-                believe in a balanced approach where academics, character
-                building, and extracurricular activities go hand in hand.
-                <br />
-                <br />
-                Our dedicated team of teachers and staff work tirelessly to
-                create a safe, inclusive, and inspiring environment where
-                students can explore their potential and grow into confident
-                individuals. With a focus on innovation, discipline, and
-                respect, we strive to prepare the next generation of leaders who
-                will contribute positively to society.
-              </p>
-            </div>
+      {/* Content */}
+      <div className="container w-full z-10 max-w-[1100px] mx-auto">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
+          {/* Image */}
+          <div className="w-full lg:w-1/2">
+            <img
+              src={aboutimg}
+              className="w-full rounded-xl shadow-lg"
+              alt="About us"
+            />
           </div>
-        </section>
+
+          {/* Text */}
+          <div className="w-full lg:w-1/2 text-left">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white/90 poppins">
+              ABOUT US
+            </h2>
+            <p className="text-base md:text-lg text-white leading-relaxed">
+              At <span className="font-semibold">Al Mansoor School</span>, we
+              are dedicated to nurturing young minds, fostering creativity, and
+              encouraging leadership. Our mission is to provide quality
+              education with values, preparing students to succeed in life. We
+              believe in a balanced approach where academics, character
+              building, and extracurricular activities go hand in hand.
+              <br />
+              <br />
+              Our dedicated team of teachers and staff work tirelessly to create
+              a safe, inclusive, and inspiring environment where students can
+              explore their potential and grow into confident individuals. With
+              a focus on innovation, discipline, and respect, we strive to
+              prepare the next generation of leaders who will contribute
+              positively to society.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
