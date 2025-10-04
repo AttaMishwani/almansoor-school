@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Events = () => {
+  const sectionRef = useRef(null);
+
   const events = [
     {
       id: 1,
@@ -31,17 +37,69 @@ const Events = () => {
     },
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate heading
+      gsap.from(".events-heading", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".events-heading",
+          start: "top 85%",
+        },
+      });
+
+      // Animate each event block
+      gsap.utils.toArray(".event-item").forEach((item, i) => {
+        const image = item.querySelector(".event-img");
+        const text = item.querySelector(".event-text");
+
+        gsap.from(image, {
+          x: i % 2 === 0 ? -100 : 100, // alternate direction
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+          },
+        });
+
+        gsap.from(text, {
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          delay: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+          },
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-16 px-4 sm:px-6 bg-gray-50">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold text-black/70 mb-12 text-center poppins">
+    <section
+      ref={sectionRef}
+      className="py-16 px-4 sm:px-6 bg-gray-50 overflow-hidden"
+    >
+      {/* Heading */}
+      <h2 className="events-heading text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold text-black/70 mb-12 text-center poppins">
         Events
       </h2>
 
+      {/* Events List */}
       <div className="max-w-6xl mx-auto space-y-16">
         {events.map((event, index) => (
           <div
             key={event.id}
-            className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 ${
+            className={`event-item flex flex-col md:flex-row items-center gap-6 md:gap-12 ${
               index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
             }`}
           >
@@ -50,12 +108,12 @@ const Events = () => {
               <img
                 src={event.image}
                 alt={event.title}
-                className="rounded-xl shadow-lg w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
+                className="event-img rounded-xl shadow-lg w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover"
               />
             </div>
 
             {/* Text */}
-            <div className="w-full md:w-1/2 text-center md:text-left">
+            <div className="event-text w-full md:w-1/2 text-center md:text-left">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-blue-600 mb-2">
                 {event.title}
               </h3>

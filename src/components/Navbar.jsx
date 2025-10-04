@@ -77,7 +77,7 @@ const Navbar = () => {
                 key={link.name}
                 to={link.to}
                 onClick={() => setIsOpen(false)} // close menu on click
-                className="transition duration-300 hover:text-blue-500"
+                className="transition  duration-300 !text-blue-500 hover:border-b-2 hover:border-b-blue-500"
               >
                 {link.name}
               </Link>

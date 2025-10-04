@@ -1,17 +1,64 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import hero from "../../assets/images/students.png";
+import { gsap } from "gsap";
 
 const HomeSection = () => {
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const textRef = useRef(null);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate title
+      gsap.from(titleRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power3.out",
+      });
+
+      // Animate paragraph
+      gsap.from(textRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: "power3.out",
+      });
+
+      // Animate image
+      gsap.from(imgRef.current, {
+        x: 100,
+        opacity: 0,
+        duration: 1.2,
+        delay: 0.5,
+        ease: "power3.out",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative bg-white min-h-[90vh] flex items-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative bg-white min-h-[90vh] flex items-center overflow-hidden"
+    >
       <div className="container mb-12 md:mb-20 relative z-10 max-w-[1100px] mx-auto px-4">
         <div className="max-w-full md:max-w-[65%]">
           {/* Heading */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-blue-500 leading-tight poppins">
+          <h1
+            ref={titleRef}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-blue-500 leading-tight poppins"
+          >
             Achieve Knowledge From Cradle To Grave
           </h1>
           {/* Paragraph */}
-          <p className="text-base sm:text-lg md:text-xl text-gray-700">
+          <p
+            ref={textRef}
+            className="text-base sm:text-lg md:text-xl text-gray-700"
+          >
             Empowering students with trust, knowledge, and professionalism.{" "}
             <br className="hidden sm:block" /> Join us on the journey to a
             brighter future.
@@ -20,7 +67,10 @@ const HomeSection = () => {
       </div>
 
       {/* Hero Image */}
-      <div className="absolute bottom-0 right-[-20%] sm:right-[-10%] w-[80%] sm:w-[60%] md:w-[50%] lg:w-[45%] z-0">
+      <div
+        ref={imgRef}
+        className="absolute bottom-0 right-[-20%] sm:right-[-10%] w-[80%] sm:w-[60%] md:w-[50%] lg:w-[45%] z-0"
+      >
         <img
           src={hero}
           alt="hero"

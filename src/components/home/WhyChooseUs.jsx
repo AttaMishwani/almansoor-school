@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import trust from "../../assets/images/icons/relationship.png";
 import teachers from "../../assets/images/icons/businessman.png";
 import growth from "../../assets/images/icons/growth (1).png";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const WhyChooseUs = () => {
+  const sectionRef = useRef(null);
+
   const cards = [
     {
       id: 1,
@@ -31,8 +37,39 @@ const WhyChooseUs = () => {
     },
   ];
 
+  useEffect(() => {
+    if (typeof window === "undefined") return; // SSR guard
+
+    const ctx = gsap.context(() => {
+      const elems = gsap.utils.toArray(".why-card"); // selects only existing DOM nodes
+      if (!elems.length) return;
+
+      // initial state (so they are hidden before scroll)
+      gsap.set(elems, { autoAlpha: 0, y: 40 });
+
+      // reveal animation
+      gsap.to(elems, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.85,
+        ease: "power3.out",
+        stagger: 0.18,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+          // markers: true, // <-- enable this to debug trigger positions
+        },
+      });
+    }, sectionRef);
+
+    // cleanup on unmount / strict mode
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-16 max-w-6xl mx-auto px-4">
+    <section ref={sectionRef} className="py-16 max-w-6xl mx-auto px-4">
       {/* Heading */}
       <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black/70 mb-10 text-center poppins">
         Why Choose Us?
@@ -43,7 +80,7 @@ const WhyChooseUs = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className={`${card.bg} rounded-xl p-6 py-12 shadow-lg shadow-blue-400/40 
+            className={`${card.bg} why-card rounded-xl p-6 py-12 shadow-lg shadow-blue-400/40 
               hover:shadow-2xl hover:shadow-blue-400/70 
               hover:scale-105 transform transition duration-300 ease-in-out cursor-pointer`}
           >

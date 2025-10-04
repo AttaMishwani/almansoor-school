@@ -31,7 +31,7 @@ const Home = () => {
         {/* Features Section */}
         <WhyChooseUs />
       </div>
-      <StudentLife />
+
       <AdmissionsOpen />
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 280">
         <path

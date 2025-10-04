@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,25 +36,44 @@ const WhatParentsSays = () => {
   ];
 
   useEffect(() => {
-    const cards = sectionRef.current.querySelectorAll(".testimonial-card");
+    const ctx = gsap.context(() => {
+      // Heading animation
+      gsap.from(".parents-heading", {
+        y: 40,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+      });
 
-    gsap.from(cards, {
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-      },
-      opacity: 0,
-      y: 50,
-      stagger: 0.2,
-      duration: 1,
-      ease: "power3.out",
-    });
+      // Testimonials cards animation
+      gsap.from(".testimonial-card", {
+        y: 50,
+
+        scale: 0.95,
+        duration: 1,
+
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16 px-4 sm:px-6 md:px-8">
+    <section
+      ref={sectionRef}
+      className="py-16 px-4 sm:px-6 md:px-8 overflow-hidden"
+    >
       {/* Title */}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold text-black/70 mb-12 text-center poppins">
+      <h2 className="parents-heading text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold text-black/70 mb-12 text-center poppins">
         What Parents Say
       </h2>
 
