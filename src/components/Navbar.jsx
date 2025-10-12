@@ -14,6 +14,7 @@ const Navbar = () => {
     { name: "Contact", to: "/contact" },
     { name: "Career", to: "/career" },
     { name: "Events", to: "/events" },
+    { name: "Admin Panel", to: "/adminpanel" },
   ];
 
   // GSAP animation on menu open/close

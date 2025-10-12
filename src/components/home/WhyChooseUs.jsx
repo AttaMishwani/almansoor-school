@@ -13,7 +13,7 @@ const WhyChooseUs = () => {
   const cards = [
     {
       id: 1,
-      title: "Trusted Service",
+      title: "Proven Excellence",
       desc: "We provide reliable and transparent education that builds long-term trust with parents and students.",
       img: trust,
       bg: "bg-blue-500",

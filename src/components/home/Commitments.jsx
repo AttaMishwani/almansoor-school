@@ -50,10 +50,10 @@ const Commitments = () => {
         {/* Mission */}
         <div className="text-center md:text-left fade-up">
           <p className="text-white text-sm md:text-base leading-relaxed">
-            Happy Palace Group of Schools’ mission is to provide enlightened
-            education and examination services to the students. The future of a
-            nation depends mainly on its educational system. Education sets the
-            path for development and helps to achieve the desired goals.
+            Al Mansoor School’s mission is to provide enlightened education and
+            examination services to the students. The future of a nation depends
+            mainly on its educational system. Education sets the path for
+            development and helps to achieve the desired goals.
           </p>
         </div>
 
@@ -61,9 +61,9 @@ const Commitments = () => {
         <div className="text-center md:text-left fade-up">
           <p className="text-white text-sm md:text-base leading-relaxed">
             Committed to excellence in developing dynamic personalities to
-            accept the challenges of modern era. Committed in creating expertise
-            and advancement in every field of life serving mankind and being
-            patriotic Pakistani citizens.
+            accept the challenges of the modern era. Committed to creating
+            expertise and advancement in every field of life, serving mankind,
+            and being patriotic Pakistani citizens.
           </p>
         </div>
       </div>

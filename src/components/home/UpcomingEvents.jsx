@@ -52,7 +52,6 @@ const UpcomingEvents = () => {
 
       // collect cards (guaranteed to exist after render)
       const cards = gsap.utils.toArray(".upcoming-card");
-      console.log("GSAP: upcoming cards found =", cards.length); // debug
 
       // initial state
       gsap.set(cards, { autoAlpha: 0, y: 30, scale: 0.98 });
