@@ -1,5 +1,6 @@
+// src/components/AdminAuth.jsx
 import React, { useState } from "react";
-import { adminLogin, adminSignUp } from "../../firebase/auth/authService";
+import { adminLogin } from "../../supabase/auth/authService"; // updated path
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -18,14 +19,10 @@ const AdminAuth = () => {
     setErr("");
 
     try {
-      let user;
-      if (mode === "signup") {
-        user = await adminSignUp(email, password);
-      } else {
-        user = await adminLogin(email, password);
-      }
+      let user = await adminLogin(email, password);
 
-      dispatch(setUser({ email: user.email, uid: user.uid }));
+      dispatch(setUser({ email: user.email, id: user.id }));
+
       navigate("/adminpanel");
     } catch (error) {
       console.error(error);
@@ -38,7 +35,7 @@ const AdminAuth = () => {
   };
 
   return (
-    <section className="min-h-screen  flex items-center justify-center px-4">
+    <section className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 border border-blue-100">
         <div className="text-center mb-6">
           <div className="flex justify-center mb-3">
@@ -96,32 +93,6 @@ const AdminAuth = () => {
             <FaLock />
             {mode === "signup" ? "Sign Up (Admin Only)" : "Login as Admin"}
           </button>
-
-          <div className="text-center text-sm text-gray-600">
-            {mode === "signup" ? (
-              <>
-                Already have an account?{" "}
-                <button
-                  type="button"
-                  onClick={() => setMode("login")}
-                  className="text-blue-600 font-medium underline hover:text-blue-700"
-                >
-                  Login
-                </button>
-              </>
-            ) : (
-              <>
-                Need to create admin account?{" "}
-                <button
-                  type="button"
-                  onClick={() => setMode("signup")}
-                  className="text-blue-600 font-medium underline hover:text-blue-700"
-                >
-                  Sign Up
-                </button>
-              </>
-            )}
-          </div>
         </form>
       </div>
     </section>

@@ -1,93 +1,162 @@
-import React from "react";
+// src/pages/AdminPanel.jsx
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { adminLogout } from "../firebase/auth/authService";
-import { clearUser } from "../redux/authSlice";
-import { FaUserShield, FaSignOutAlt, FaCog } from "react-icons/fa";
+import { supabase } from "../supabase/supabaseClient"; // Your Supabase client
+import { clearUser, setUser } from "../redux/authSlice";
+import PostEvent from "../components/adminPanel/PostEvent";
+import ManageEvents from "../components/adminPanel/ManageEvents";
 
 const AdminPanel = () => {
+  const [activeTab, setActiveTab] = useState("postEvent");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
 
+  // Check session on mount
+  useEffect(() => {
+    const session = supabase.auth.getSession().then(({ data }) => {
+      if (data.session) {
+        dispatch(
+          setUser({ email: data.session.user.email, uid: data.session.user.id })
+        );
+      } else {
+        navigate("/admin-auth");
+      }
+    });
+
+    // Listen for auth changes (optional)
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (session?.user) {
+          dispatch(
+            setUser({ email: session.user.email, uid: session.user.id })
+          );
+        } else {
+          dispatch(clearUser());
+          navigate("/admin-auth");
+        }
+      }
+    );
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, [dispatch, navigate]);
+
   const handleLogout = async () => {
     try {
-      await adminLogout();
+      await supabase.auth.signOut();
+      dispatch(clearUser());
+      navigate("/admin-auth");
     } catch (error) {
-      console.log(error);
+      console.log("Logout error:", error);
     }
+  };
 
-    dispatch(clearUser());
-    navigate("/");
+  // Render tab content
+  const renderContent = () => {
+    switch (activeTab) {
+      case "postEvent":
+        return <PostEvent />;
+      case "manageEvents":
+        return <ManageEvents />;
+      case "siteSettings":
+        return (
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Site Settings</h2>
+            <p className="text-gray-600">
+              Adjust website configurations and preferences (dummy content).
+            </p>
+          </div>
+        );
+      case "analytics":
+        return (
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Analytics</h2>
+            <p className="text-gray-600">
+              View traffic and engagement statistics (dummy content).
+            </p>
+          </div>
+        );
+      default:
+        return <p>Select a tab to begin.</p>;
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex flex-col items-center py-10 px-4">
-      {/* Header Card */}
-      <div className="w-full max-w-5xl bg-white shadow-xl rounded-2xl p-8 mb-8 border border-blue-100">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <FaUserShield className="text-blue-500 text-4xl" />
-            <div>
-              <p className="text-gray-500 text-sm">
-                Manage your school website efficiently and securely.
-              </p>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-100 flex">
+      {/* Sidebar */}
+      <div className="w-64 bg-white shadow-lg p-6 flex flex-col justify-between">
+        <div>
+          <h1 className="text-xl font-bold text-center mb-6">Admin Panel</h1>
 
+          <nav className="space-y-2">
+            <button
+              onClick={() => setActiveTab("postEvent")}
+              className={`w-full text-left px-4 py-2 rounded-lg font-medium transition ${
+                activeTab === "postEvent"
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-50 text-gray-700"
+              }`}
+            >
+              📅 Post New Event
+            </button>
+
+            <button
+              onClick={() => setActiveTab("manageEvents")}
+              className={`w-full text-left px-4 py-2 rounded-lg font-medium transition ${
+                activeTab === "manageEvents"
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-50 text-gray-700"
+              }`}
+            >
+              🧾 Manage Events
+            </button>
+
+            <button
+              onClick={() => setActiveTab("siteSettings")}
+              className={`w-full text-left px-4 py-2 rounded-lg font-medium transition ${
+                activeTab === "siteSettings"
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-50 text-gray-700"
+              }`}
+            >
+              ⚙️ Site Settings
+            </button>
+
+            <button
+              onClick={() => setActiveTab("analytics")}
+              className={`w-full text-left px-4 py-2 rounded-lg font-medium transition ${
+                activeTab === "analytics"
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-50 text-gray-700"
+              }`}
+            >
+              📊 Analytics
+            </button>
+          </nav>
+        </div>
+
+        <div className="text-center mt-6">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold px-5 py-2.5 rounded-lg shadow transition-all duration-200"
+            className="px-4 py-2 w-full bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
           >
-            <FaSignOutAlt />
             Logout
           </button>
         </div>
       </div>
 
-      {/* Admin Info Section */}
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md p-6 border border-gray-100">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-          <FaCog className="text-blue-500" />
-          Admin Information
-        </h2>
+      {/* Main Content */}
+      <div className="flex-1 p-8">
+        <div className="bg-white rounded-xl shadow p-6">
+          <p className="text-sm text-gray-500 mb-2">
+            Signed in as:{" "}
+            <span className="font-medium">{auth.user?.email}</span>
+          </p>
 
-        <p className="text-gray-600 mb-6">
-          Signed in as:{" "}
-          <span className="font-medium text-blue-600">
-            {auth.user?.email ?? "Unknown"}
-          </span>
-        </p>
-
-        {/* Admin Action Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-b from-blue-50 to-white p-5 rounded-xl border border-blue-100 shadow hover:shadow-lg transition">
-            <h3 className="text-lg font-semibold text-blue-600 mb-2">
-              Manage Content
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Upload, update, or delete website content like banners, text, and
-              media.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-b from-green-50 to-white p-5 rounded-xl border border-green-100 shadow hover:shadow-lg transition">
-            <h3 className="text-lg font-semibold text-green-600 mb-2">
-              Manage Events
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Add upcoming events, announcements, or school activities easily.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-b from-purple-50 to-white p-5 rounded-xl border border-purple-100 shadow hover:shadow-lg transition">
-            <h3 className="text-lg font-semibold text-purple-600 mb-2">
-              Manage Users
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Control user access, monitor admin activity, and ensure security.
-            </p>
-          </div>
+          {renderContent()}
         </div>
       </div>
     </div>
