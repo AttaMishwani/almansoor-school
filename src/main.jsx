@@ -8,6 +8,8 @@ import { HashRouter, BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import store, { persistor } from "./redux/store.js";
 import { PersistGate } from "redux-persist/integration/react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +19,7 @@ createRoot(document.getElementById("root")).render(
       <HashRouter>
         <Provider store={store}>
           <PersistGate loading="null" persistor={persistor}>
+            <ToastContainer />
             <App />
           </PersistGate>
         </Provider>

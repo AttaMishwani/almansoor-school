@@ -13,6 +13,7 @@ import AdminPanel from "./pages/AdminPanel";
 import { useSelector } from "react-redux";
 import AdminAuth from "./components/auth/AdminAuth";
 import SingleEventPost from "./components/adminPanel/SingleEventPost";
+import EditEvent from "./components/adminPanel/EditEvent";
 
 const AdminRoute = () => {
   const auth = useSelector((state) => state.auth);
@@ -37,6 +38,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="admin-auth" element={<AdminAuth />} />
+        <Route path="edit-event/:id" element={<EditEvent />} />
       </Route>
 
       {/* ✅ Event details route */}

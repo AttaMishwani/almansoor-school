@@ -5,32 +5,58 @@ import science from "../../assets/images/home/upcomingevents/science.jpg";
 import sports from "../../assets/images/home/upcomingevents/sports.jpg";
 import culturalFest from "../../assets/images/home/upcomingevents/portrait.jpg";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../UiBlocks/Loader";
+import { supabase } from "../../supabase/supabaseClient";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const UpcomingEvents = () => {
   const sectionRef = useRef(null);
 
-  const events = [
-    {
-      id: 1,
-      title: "Science Fair 2025",
-      desc: "A showcase of innovative projects by our talented students. A showcase of innovative projects by our talented students.",
-      img: science,
-    },
-    {
-      id: 2,
-      title: "Sports Day",
-      desc: "A day full of energy, competition, and teamwork on the field. A day full of energy, competition, and teamwork on the field.",
-      img: sports,
-    },
-    {
-      id: 3,
-      title: "Cultural Festival",
-      desc: "Celebrating diversity, creativity, and unity through performances. Celebrating diversity, creativity, and unity through performances.",
-      img: culturalFest,
-    },
-  ];
+  // const events = [
+  //   {
+  //     id: 1,
+  //     title: "Science Fair 2025",
+  //     desc: "A showcase of innovative projects by our talented students. A showcase of innovative projects by our talented students.",
+  //     img: science,
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Sports Day",
+  //     desc: "A day full of energy, competition, and teamwork on the field. A day full of energy, competition, and teamwork on the field.",
+  //     img: sports,
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Cultural Festival",
+  //     desc: "Celebrating diversity, creativity, and unity through performances. Celebrating diversity, creativity, and unity through performances.",
+  //     img: culturalFest,
+  //   },
+  // ];
+
+  const fetchEvents = async () => {
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .order("date", { ascending: false })
+      .limit(3);
+
+    if (error) {
+      console.error("Error fetching events:", error);
+      return [];
+    }
+
+    return data;
+  };
+  const {
+    data: events = [],
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["latest-events"],
+    queryFn: fetchEvents,
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return; // SSR guard
@@ -87,6 +113,8 @@ const UpcomingEvents = () => {
     };
   }, []);
 
+  if (isError) return <>Error fetching events</>;
+  if (isLoading) return <Loader />;
   return (
     <section
       ref={sectionRef}
@@ -106,7 +134,7 @@ const UpcomingEvents = () => {
               className="upcoming-card bg-white hover:scale-105 transform transition duration-300 ease-in-out rounded-xl p-4 flex flex-col shadow-lg"
             >
               <img
-                src={event.img}
+                src={event.image_url}
                 alt={event.title}
                 className="w-full h-48 sm:h-56 lg:h-60 object-cover rounded-lg mb-4"
               />
@@ -116,7 +144,7 @@ const UpcomingEvents = () => {
               </h3>
 
               <p className="text-gray-600 text-sm sm:text-base flex-grow">
-                {event.desc}
+                {event.description.slice(0, 100)}...
               </p>
 
               <Link to={`/events/${event.id}`}>

@@ -2,6 +2,8 @@ import React from "react";
 import { supabase } from "../../supabase/supabaseClient";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loader from "../../UiBlocks/Loader";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const fetchEvents = async () => {
   const { data, error } = await supabase
@@ -14,8 +16,8 @@ const fetchEvents = async () => {
 };
 
 const ManageEvents = () => {
-  const queryClient = useQueryClient(); // ✅ define here, not inside fetchEvents
-
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const {
     isLoading,
     data: Events = [],
@@ -25,6 +27,17 @@ const ManageEvents = () => {
     queryKey: ["events"],
     queryFn: fetchEvents,
   });
+
+  const handleDelete = async (id) => {
+    try {
+      await supabase.from("events").delete().eq("id", id);
+      queryClient.invalidateQueries(["events"]);
+      toast.success("Event deleted successfully");
+    } catch (err) {
+      console.error("Error deleting event:", err);
+      toast.error("Error deleting event");
+    }
+  };
 
   if (isLoading) return <Loader />;
   if (isError)
@@ -67,10 +80,16 @@ const ManageEvents = () => {
                 <td className="p-3">{event.title}</td>
                 <td className="p-3">{event.date}</td>
                 <td className="p-3 flex space-x-2">
-                  <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
+                  <button
+                    onClick={() => navigate(`/edit-event/${event.id}`)}
+                    className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+                  >
                     Edit
                   </button>
-                  <button className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
+                  <button
+                    onClick={() => handleDelete(event.id)}
+                    className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
+                  >
                     Delete
                   </button>
                   <button
