@@ -11,10 +11,11 @@ const Navbar = () => {
   const links = [
     { name: "Home", to: "/" },
     { name: "About", to: "/about" },
-    { name: "Contact", to: "/contact" },
-    { name: "Career", to: "/career" },
+    { name: "Testimonials", to: "#testimonials" },
+
+    // { name: "Career", to: "/career" },
     { name: "Events", to: "/events" },
-    { name: "Admin Panel", to: "/adminpanel" },
+    // { name: "Admin Panel", to: "/adminpanel" },
   ];
 
   // GSAP animation on menu open/close
@@ -38,52 +39,11 @@ const Navbar = () => {
   return (
     <header className="w-full shadow-md">
       <nav className="bg-brandBlue mx-auto max-w-[1100px] w-full">
-        <div className="container mx-auto flex justify-between items-center py-3 px-4">
+        <div className="container mx-auto flex justify-center items-center py-3 px-4">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="logo" className="w-32 sm:w-40" />
+            <img src={logo} alt="logo" className="w-44 sm:w-60" />
           </Link>
-
-          {/* Desktop Links */}
-          <div className="hidden md:flex space-x-6 font-medium">
-            {links.map((link) => (
-              <Link
-                key={link.name}
-                to={link.to}
-                className="relative pb-1 transition duration-300 hover:text-blue-500 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-blue-500"
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div
-          ref={menuRef}
-          className="md:hidden bg-brandBlue px-4 overflow-hidden"
-          style={{ height: 0, opacity: 0 }}
-        >
-          <div className="flex flex-col space-y-4 py-4 font-medium">
-            {links.map((link) => (
-              <Link
-                key={link.name}
-                to={link.to}
-                onClick={() => setIsOpen(false)} // close menu on click
-                className="transition  duration-300 !text-blue-500 hover:border-b-2 hover:border-b-blue-500"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
         </div>
       </nav>
     </header>

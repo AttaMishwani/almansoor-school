@@ -1,19 +1,8 @@
 // src/supabase/auth/authService.js
 import { supabase } from "../supabaseClient";
 
-// Allowed admin credentials
-const ADMIN_EMAIL = "atta.rehmanmishwani@gmail.com";
-const ADMIN_PASSWORD = "atta2006";
-
-// Login
+// Login admin using Supabase Auth
 export const adminLogin = async (email, password) => {
-  // Restrict login to single admin
-  if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
-    const error = new Error("Invalid admin credentials");
-    error.code = "ADMIN_MISMATCH";
-    throw error;
-  }
-
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -24,7 +13,13 @@ export const adminLogin = async (email, password) => {
     throw error;
   }
 
-  return data.user;
+  // Optional: Check if the logged-in user is admin (based on role or email)
+  const user = data.user;
+  if (user.email !== "atta.rehmanmishwani@gmail.com") {
+    throw new Error("Access denied. Not an admin account.");
+  }
+
+  return user;
 };
 
 // Logout

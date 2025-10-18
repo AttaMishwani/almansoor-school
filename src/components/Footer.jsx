@@ -22,7 +22,7 @@ const Footer = () => {
         ></path>
       </svg>
 
-      <div className="max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div className="max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand */}
         <div>
           <h2 className="text-3xl font-extrabold tracking-wide">Al Mansoor</h2>
@@ -30,29 +30,6 @@ const Footer = () => {
             Empowering students with knowledge, values, and guidance to build a
             brighter future.
           </p>
-        </div>
-
-        {/* Links */}
-        <div>
-          <h3 className="text-lg font-semibold mb-5">Quick Links</h3>
-          <ul className="space-y-3 text-sm">
-            {[
-              { name: "Home", to: "/" },
-              { name: "About", to: "/about" },
-              { name: "Career", to: "/career" },
-              { name: "Events", to: "/events" },
-              { name: "Contact", to: "/contact" },
-            ].map((link) => (
-              <li key={link.name}>
-                <Link
-                  to={link.to}
-                  className="hover:text-white transition-colors"
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
 
         {/* Contact */}

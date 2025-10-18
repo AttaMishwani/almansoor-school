@@ -71,6 +71,7 @@ const WhatParentsSays = () => {
     <section
       ref={sectionRef}
       className="py-16 px-4 sm:px-6 md:px-8 overflow-hidden"
+      id="testimonials"
     >
       {/* Title */}
       <h2 className="parents-heading text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold text-black/70 mb-12 text-center poppins">
