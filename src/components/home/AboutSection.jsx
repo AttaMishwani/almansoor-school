@@ -46,7 +46,7 @@ const AboutSection = () => {
       ref={sectionRef}
       className="w-full relative min-h-screen bg-blue-500 flex justify-center items-center px-4 py-12"
     >
-      <div className=" w-full z-10 max-w-[1100px] mx-auto">
+      <div className="w-full z-10 max-w-[1100px] mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
           {/* Image */}
           <div ref={imgRef} className="w-full lg:w-1/2">

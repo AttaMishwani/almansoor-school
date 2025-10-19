@@ -22,7 +22,7 @@ const Footer = () => {
         ></path>
       </svg>
 
-      <div className="max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="max-w-[1100px] mx-auto sm:px-2 lg:px-0 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand */}
         <div>
           <h2 className="text-3xl font-extrabold tracking-wide">Al Mansoor</h2>
@@ -56,7 +56,10 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-5">Follow Us</h3>
           <div className="flex gap-4 text-lg">
             {[
-              { icon: <FaFacebookF />, href: "https://facebook.com" },
+              {
+                icon: <FaFacebookF />,
+                href: "https://www.facebook.com/AMCSSchool",
+              },
               { icon: <FaInstagram />, href: "https://instagram.com" },
               { icon: <FaTwitter />, href: "https://twitter.com" },
               { icon: <FaLinkedinIn />, href: "https://linkedin.com" },

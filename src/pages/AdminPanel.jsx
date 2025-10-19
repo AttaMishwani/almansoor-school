@@ -140,6 +140,12 @@ const AdminPanel = () => {
 
         <div className="text-center mt-6">
           <button
+            onClick={() => navigate("/")}
+            className="px-4 py-2 w-full bg-blue-500 mb-3 text-white rounded-lg hover:bg-blue-600 transition"
+          >
+            Go to Home
+          </button>
+          <button
             onClick={handleLogout}
             className="px-4 py-2 w-full bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
           >

@@ -93,6 +93,13 @@ const AdminAuth = () => {
             <FaLock />
             {mode === "signup" ? "Sign Up (Admin Only)" : "Login as Admin"}
           </button>
+
+          <button
+            className="bg-green-700 text-white font-bold py-1 px-5 rounded-md"
+            onClick={() => navigate("/")}
+          >
+            Go Back
+          </button>
         </form>
       </div>
     </section>

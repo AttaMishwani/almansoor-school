@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { supabase } from "../../supabase/supabaseClient"; // supabase client
 import Loader from "../../UiBlocks/Loader";
+import { toast } from "react-toastify";
 
 const CLOUD_NAME = "dyalydbjx"; // your Cloudinary cloud name
 const UPLOAD_PRESET = "almansoor"; // your unsigned upload preset
@@ -56,7 +57,7 @@ const PostEvent = () => {
 
       if (error) throw error;
 
-      alert("Event posted successfully");
+      toast.success("Event posted successfully!");
 
       // Clear fields
       setEventTitle("");
@@ -65,7 +66,7 @@ const PostEvent = () => {
       setEventImage(null);
     } catch (error) {
       console.log(error);
-      alert("Error posting event: " + error.message);
+      toast.error("Error posting event: " + error.message);
     } finally {
       setLoading(false);
     }
