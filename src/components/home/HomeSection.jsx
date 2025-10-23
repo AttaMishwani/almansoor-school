@@ -45,7 +45,7 @@ const HomeSection = () => {
       ref={sectionRef}
       className="relative bg-white md:py-23  py-25 flex items-center overflow-hidden "
     >
-      <div className="mb-12 md:mb-20 relative z-10 max-w-[1100px] mx-auto  ">
+      <div className="mb-12 md:mb-20 relative mt-3 sm:mt-5 md:mt-8 lg:mt-26 z-10 max-w-[1100px] mx-auto px-8 sm:px-4 md:px-4 lg:px-4 ">
         <div className="max-w-full md:max-w-[65%]">
           {/* Heading */}
           <h1

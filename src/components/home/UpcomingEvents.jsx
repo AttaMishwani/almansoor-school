@@ -120,7 +120,7 @@ const UpcomingEvents = () => {
       ref={sectionRef}
       className="w-full relative bg-cover bg-center flex justify-center items-center bg-blue-500 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      <div className="container py-12 sm:py-16 lg:py-20 z-10 w-full max-w-[1100px]">
+      <div className="px-8 sm:px-4 md:px-4 lg:px-4 py-12 sm:py-16 lg:py-20 z-10 w-full max-w-[1100px]">
         {/* Heading */}
         <h2 className="upcoming-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-8 sm:mb-12 text-center poppins">
           Upcoming Events

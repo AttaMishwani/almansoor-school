@@ -22,7 +22,7 @@ const Footer = () => {
         ></path>
       </svg>
 
-      <div className="max-w-[1100px] mx-auto sm:px-2 lg:px-0 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="max-w-[1100px] mx-auto px-8 sm:px-4 md:px-4 lg:px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand */}
         <div>
           <h2 className="text-3xl font-extrabold tracking-wide">Al Mansoor</h2>
@@ -42,11 +42,11 @@ const Footer = () => {
             </li>
             <li className="flex items-center gap-2">
               <MdEmail className="text-lg" />
-              <span>info@almansoor.edu</span>
+              <span>amcss7800@gmail.com</span>
             </li>
             <li className="flex items-center gap-2">
               <FaPhone className="text-lg" />
-              <span>+92 300 1234567</span>
+              <span>+92 341 8997800</span>
             </li>
           </ul>
         </div>

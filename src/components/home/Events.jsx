@@ -83,9 +83,9 @@ const Events = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-16  border-2 w-full max-w-[1100px] mx-auto  bg-gray-50 overflow-hidden"
+      className="py-16   w-full  px-8 sm:px-4 md:px-4 lg:px-4 max-w-[1100px] mx-auto  bg-gray-50 overflow-hidden"
     >
-      <h2 className="events-heading text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold text-black/70 mb-12 text-center poppins">
+      <h2 className="events-heading text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold text-black/70 mb-12 text-center poppins ">
         Events
       </h2>
 

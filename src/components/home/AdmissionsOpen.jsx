@@ -31,9 +31,9 @@ const AdmissionsOpen = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full flex justify-center items-center px-4 sm:px-6"
+      className="w-full flex justify-center items-center  px-8 sm:px-4 md:px-4 lg:px-4"
     >
-      <div className="admission-box bg-blue-500 py-12 sm:py-16 px-4 sm:px-6 md:px-10 text-white text-center rounded-2xl shadow-lg w-full max-w-[1100px] my-12 sm:my-16">
+      <div className="admission-box bg-blue-500 py-12 sm:py-16 px-4 sm:px-6 md:px-10 text-white text-center rounded-2xl shadow-lg w-full max-w-[1100px] my-12 sm:my-16 ">
         {/* Heading */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4">
           Admissions are Now Open!

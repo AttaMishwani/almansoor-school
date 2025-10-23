@@ -79,7 +79,7 @@ const WhatParentsSays = () => {
       </h2>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-[1100px] px-8 sm:px-4 md:px-4 lg:px-4 w-full mx-auto">
         {testimonials.map((item) => (
           <div
             key={item.id}

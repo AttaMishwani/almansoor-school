@@ -93,7 +93,7 @@ const AdmissionInfo = () => {
             office.
           </p>
           <p className="text-gray-800 font-semibold">
-            📞 +92 300 1234567 | ✉️ admissions@example.com
+            +92 341 8997800 | amcss7800@gmail.com
           </p>
         </div>
       </div>

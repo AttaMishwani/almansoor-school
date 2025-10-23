@@ -5,11 +5,10 @@ import WhyChooseUs from "../components/home/WhyChooseUs";
 import UpcomingEvents from "../components/home/UpcomingEvents";
 import HomeSection from "../components/home/HomeSection";
 import WhatParentsSays from "../components/home/WhatParentsSays";
-import ApplyNow from "../components/home/ApplyNow";
+
 import Commitments from "../components/home/Commitments";
 import AdmissionsOpen from "../components/home/AdmissionsOpen";
 import Events from "../components/home/Events";
-import StudentLife from "../components/home/StudentLife";
 
 const Home = () => {
   return (

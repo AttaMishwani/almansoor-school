@@ -46,7 +46,7 @@ const AboutSection = () => {
       ref={sectionRef}
       className="w-full relative min-h-screen bg-blue-500 flex justify-center items-center px-4 py-12"
     >
-      <div className="w-full z-10 max-w-[1100px] mx-auto">
+      <div className="w-full z-10 max-w-[1100px] mx-auto px-8 sm:px-4 md:px-4 lg:px-4">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
           {/* Image */}
           <div ref={imgRef} className="w-full lg:w-1/2">
@@ -62,7 +62,7 @@ const AboutSection = () => {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white/90 poppins">
               ABOUT US
             </h2>
-            <p className="text-base md:text-lg text-white leading-relaxed">
+            <p className="text-base md:text-lg text-white leading-relaxed font-light">
               At <span className="font-semibold">Al Mansoor School</span>, we
               are dedicated to nurturing young minds, fostering creativity, and
               encouraging leadership. Our mission is to provide quality

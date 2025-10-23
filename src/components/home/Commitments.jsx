@@ -39,7 +39,7 @@ const Commitments = () => {
       ref={sectionRef}
       className="w-full relative py-10 pt-20 bg-blue-500 flex justify-center items-center"
     >
-      <div className="w-full max-w-[1100px] flex flex-col md:flex-row gap-y-8 md:gap-y-0 md:gap-x-[6rem] justify-between">
+      <div className="w-full max-w-[1100px] px-8 sm:px-4 md:px-4 lg:px-4 flex flex-col md:flex-row gap-y-8 md:gap-y-0 md:gap-x-[6rem] justify-between">
         {/* Heading */}
         <div className="text-center md:text-left fade-up">
           <h2 className="poppins text-2xl md:text-4xl font-bold text-white">

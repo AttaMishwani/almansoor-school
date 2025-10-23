@@ -69,7 +69,10 @@ const WhyChooseUs = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16 w-full max-w-[1100px] mx-auto ">
+    <section
+      ref={sectionRef}
+      className="py-16 w-full max-w-[1100px] mx-auto px-8 sm:px-4 md:px-4 lg:px-4 "
+    >
       {/* Heading */}
       <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black/70 mb-10 text-center poppins">
         Why Choose Us?
